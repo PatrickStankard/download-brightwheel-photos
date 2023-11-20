@@ -12,7 +12,11 @@ for PHOTO_URL in "${PHOTO_URLS[@]}"; do
     FILENAME="${FILENAME//\//}.jpg"
     LOCAL_PHOTO_PATH="${PHOTOS_DIR}/${FILENAME}"
 
-    curl -so "${LOCAL_PHOTO_PATH}" "${PHOTO_URL}" && echo "[download-brightwheel-photos] ${PHOTO_URL} -> ${LOCAL_PHOTO_PATH}"
+    if [ -f "${LOCAL_PHOTO_PATH}" ]; then
+        echo "[download-brightwheel-photos] Skipping ${PHOTO_URL} (file already exists)"
+    else
+        curl -so "${LOCAL_PHOTO_PATH}" "${PHOTO_URL}" && echo "[download-brightwheel-photos] Downloaded ${PHOTO_URL} -> ${LOCAL_PHOTO_PATH}"
+    fi
 done
 
 echo "[download-brightwheel-photos] Done!"
