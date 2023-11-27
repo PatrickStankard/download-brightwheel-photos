@@ -1,2 +1,3 @@
 photos/*.jpg
 bash/photo-urls.env
+.DS_Store
